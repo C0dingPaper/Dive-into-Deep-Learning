@@ -161,6 +161,9 @@ class DataModule(d2l.HyperParameters):  #@save
     def val_dataloader(self):
         return self.get_dataloader(train=False)
 
+    
+                         
+    
 
 # ==================================================
 # Trainer
