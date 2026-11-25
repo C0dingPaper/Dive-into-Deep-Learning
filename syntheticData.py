@@ -49,3 +49,8 @@ class SyntheticRegressionData(d2l.DataModule):  #@save
             )
 
             yield self.X[batch_indices], self.y[batch_indices]
+
+# Initializes the class object 
+X, y = next(iter(data.train_dataloader()))
+
+print('X shape:', X.shape, '\ny shape:', y.shape)
