@@ -30,3 +30,22 @@ class SyntheticRegressionData(d2l.DataModule):  #@save
         noise = torch.randn(n, 1) * noise
 
         self.y = torch.matmul(self.X, w.reshape((-1, 1))) + b + noise
+
+    def get_dataloader(self, train):
+        if train:
+            indices = list(range(0, self.num_train))
+
+            # The examples are read in random order
+            random.shuffle(indices)
+
+        else:
+            indices = list(
+                range(self.num_train, self.num_train + self.num_val)
+            )
+
+        for i in range(0, len(indices), self.batch_size):
+            batch_indices = torch.tensor(
+                indices[i:i + self.batch_size]
+            )
+
+            yield self.X[batch_indices], self.y[batch_indices]
